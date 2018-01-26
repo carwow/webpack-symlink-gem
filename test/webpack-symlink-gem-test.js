@@ -20,7 +20,7 @@ class FakeCompiler {
 
 class FakeCompilation {
   constructor() {
-    this.errors = []
+    this.errors = [];
   }
 }
 
