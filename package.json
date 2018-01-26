@@ -1,0 +1,15 @@
+{
+  "name": "webpack-symlink-gem",
+  "version": "1.0.0",
+  "description": "Webpack plugin to symlink gem paths into the project directory",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "mocha",
+    "test-watch": "mocha --watch"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "mocha": "^5.0.0"
+  }
+}

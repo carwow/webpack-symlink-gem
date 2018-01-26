@@ -1,0 +1,23 @@
+PATH
+  remote: test/fake-gems/gem_one
+  specs:
+    gem_one (0.1.0)
+
+PATH
+  remote: test/fake-gems/gem_two
+  specs:
+    gem_two (0.1.0)
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  gem_one!
+  gem_two!
+
+BUNDLED WITH
+   1.16.1
