@@ -4,7 +4,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require "webpack_symlink/version"
 
 Gem::Specification.new do |spec|
-  spec.name          = "Webpack Symlink"
+  spec.name          = "webpack_symlink"
   spec.version       = WebpackSymlink::VERSION
   spec.authors       = ["Mike Wagg", "Anson Kelly"]
   spec.email         = ["mike.wagg@carwow.co.uk", "anson.kelly@carwow.co.uk"]
