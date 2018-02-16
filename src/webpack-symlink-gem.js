@@ -27,7 +27,12 @@ function clean(rootPath, gem) {
 
 function linkGem(rootPath, config) {
   console.log('LINKING GEM: ', config.name);
-  var cmd = "git clone -b 'v4.7.2' --single-branch --depth 1 git@github.com:carwow/carwow-theme.git ./vendor/gems/carwow_theme-4.7.2";
+
+  let gemPath = execSync(gemShowCmd(config.name)).toString().trim();
+  console.log('gemPath: ', gemPath);
+  let version = path.parse(gemPath).base.match(/-(\d+\.\d+\.\d+)/i)[1];
+
+  var cmd = "git clone -b 'v" + version + "' --single-branch --depth 1 " + config.gitrepo + " ./vendor/gems/" + config.name;
   console.log('Command: ', cmd);
   execSync(cmd);
 
