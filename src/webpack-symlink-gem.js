@@ -59,6 +59,7 @@ function linkGem(rootPath, config) {
   console.log('ls dir ', execSync('ls -lah ' + dir).toString().trim());
 
   console.log('ls gemPathRoot ', execSync('ls -lah ' + dir + '/' + 'carwow_core-0.14.25/').toString().trim());
+  console.log('ls gemPathRoot ', execSync('ls -lah ' + dir + '/' + 'carwow_theme-4.7.2/').toString().trim());
   console.log('ls gemPathRoot ', execSync('ls -lah ' + gemPathRoot + '/').toString().trim());
 
   if (!fs.existsSync(gemPathRoot)) {
