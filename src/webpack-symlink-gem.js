@@ -50,7 +50,7 @@ function linkGem(rootPath, config) {
 
   const fullGemPath = path.join(gemPathRoot, gemPath);
   console.log('fullGemPath: ', fullGemPath);
-
+  console.log('COPYING DIR OVER ', fullGemPath, ' to ', localPath(rootPath, gem));
   copydir.sync(fullGemPath, localPath(rootPath, gem));
   // if (!fs.existsSync(fullGemPath)) {
   //   // compilation.errors.push(makeError("Path for gem was invalid: " + fullGemPath));
