@@ -17,6 +17,8 @@ function gemShowCmd(gem) {
 }
 
 function clean(rootPath, gem) {
+  fs.execSync('mkdir -p ' + rootPath);
+
   const path = localPath(rootPath, gem);
 
   if (fs.existsSync(path)) {
@@ -26,36 +28,36 @@ function clean(rootPath, gem) {
 
 function linkGem(compilation, rootPath, config) {
   console.log('LINKING GEM: ', config.name);
-  var cmd = "git clone -b 'v4.7.2' --single-branch --depth 1 git@github.com:carwow/carwow-theme.git ./"+config.gemPathRoot+"/carwow_theme-4.7.2";
+  // var cmd = "git clone -b 'v4.7.2' --single-branch --depth 1 git@github.com:carwow/carwow-theme.git ./"+config.gemPathRoot+"/carwow_theme-4.7.2";
 
-  execSync(cmd);
+  // execSync(cmd);
 
-  // console.log('CWD: ', execSync('pwd').toString().trim());
-  // // console.log('ls ~/vendor/bundle/ruby/2.4.0/gems/ ', execSync('ls ./vendor/bundle/ruby/2.4.0/gems/').toString().trim());
-  // let gemPathRoot;
-  // const gem = config.name;
-  // const gemPath = config.gemPath || "";
+  console.log('CWD: ', execSync('pwd').toString().trim());
+  // console.log('ls ~/vendor/bundle/ruby/2.4.0/gems/ ', execSync('ls ./vendor/bundle/ruby/2.4.0/gems/').toString().trim());
+  let gemPathRoot;
+  const gem = config.name;
+  const gemPath = config.gemPath || "";
 
-  // clean(rootPath, gem);
+  clean(rootPath, gem);
 
-  // try {
-  //   gemPathRoot = execSync(gemShowCmd(gem)).toString().trim();
-  //   console.log('bundle show ', gem, ': ', gemPathRoot);
-  // } catch (err) {
-  //   console.log('ERROR getting gemPathRoot!');
-  //   compilation.errors.push(makeError(err.message));
-  //   return;
-  // }
+  try {
+    gemPathRoot = execSync(gemShowCmd(gem)).toString().trim();
+    console.log('bundle show ', gem, ': ', gemPathRoot);
+  } catch (err) {
+    console.log('ERROR getting gemPathRoot!');
+    compilation.errors.push(makeError(err.message));
+    return;
+  }
 
-  // const fullGemPath = path.join(gemPathRoot, gemPath);
-  // console.log('fullGemPath: ', fullGemPath);
-  // if (!fs.existsSync(fullGemPath)) {
-  //   // compilation.errors.push(makeError("Path for gem was invalid: " + fullGemPath));
-  //   // return;
-  //   console.log("WARNING: Path for gem was invalid, webpack may not compile: " + fullGemPath);
-  // }
+  const fullGemPath = path.join(gemPathRoot, gemPath);
+  console.log('fullGemPath: ', fullGemPath);
+  if (!fs.existsSync(fullGemPath)) {
+    // compilation.errors.push(makeError("Path for gem was invalid: " + fullGemPath));
+    // return;
+    console.log("WARNING: Path for gem was invalid, webpack may not compile: " + fullGemPath);
+  }
 
-  // fs.symlinkSync(fullGemPath, localPath(rootPath, gem));
+  fs.symlinkSync(fullGemPath, localPath(rootPath, gem));
 }
 
 class WebpackSymlinkGem {
