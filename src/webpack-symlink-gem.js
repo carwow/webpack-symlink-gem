@@ -58,6 +58,8 @@ function linkGem(compilation, rootPath, config) {
   }
 
   fs.symlinkSync(fullGemPath, localPath(rootPath, gem));
+
+  console.log('ls -lah ~/vendor/gems/ ', execSync('ls -lah ./vendor/gems/').toString().trim());
 }
 
 class WebpackSymlinkGem {
