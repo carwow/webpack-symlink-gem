@@ -27,7 +27,7 @@ function clean(rootPath, gem) {
 function linkGem(compilation, rootPath, config) {
   console.log('LINKING GEM: ', config.name);
   console.log('CWD: ', execSync('pwd').toString().trim());
-  console.log('ls ~/vendor/bundle/ruby/2.4.0/gems/ ', execSync('ls ./vendor/bundle/ruby/2.4.0/gems/').toString().trim());
+  // console.log('ls ~/vendor/bundle/ruby/2.4.0/gems/ ', execSync('ls ./vendor/bundle/ruby/2.4.0/gems/').toString().trim());
   let gemPathRoot;
   const gem = config.name;
   const gemPath = config.gemPath || "";
@@ -46,8 +46,9 @@ function linkGem(compilation, rootPath, config) {
   const fullGemPath = path.join(gemPathRoot, gemPath);
   console.log('fullGemPath: ', fullGemPath);
   if (!fs.existsSync(fullGemPath)) {
-    compilation.errors.push(makeError("Path for gem was invalid: " + fullGemPath));
-    return;
+    // compilation.errors.push(makeError("Path for gem was invalid: " + fullGemPath));
+    // return;
+    console.log("WARNING: Path for gem was invalid, webpack may not compile: " + fullGemPath);
   }
 
   fs.symlinkSync(fullGemPath, localPath(rootPath, gem));
