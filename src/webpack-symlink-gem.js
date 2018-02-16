@@ -24,7 +24,7 @@ function clean(rootPath, gem) {
   }
 }
 
-function linkGem(compilation, rootPath, config) {
+function linkGem(rootPath, config) {
   console.log('LINKING GEM: ', config.name);
   // var cmd = "git clone -b 'v4.7.2' --single-branch --depth 1 git@github.com:carwow/carwow-theme.git ./"+config.gemPathRoot+"/carwow_theme-4.7.2";
 
@@ -43,7 +43,7 @@ function linkGem(compilation, rootPath, config) {
     console.log('bundle show ', gem, ': ', gemPathRoot);
   } catch (err) {
     console.log('ERROR getting gemPathRoot!');
-    compilation.errors.push(makeError(err.message));
+    // compilation.errors.push(makeError(err.message));
     return;
   }
 
@@ -73,15 +73,23 @@ class WebpackSymlinkGem {
     this.rootPath = options.rootPath;
   }
 
-  apply(compiler) {
-    // compiler.plugin("compilation", (compilation) => {
-    compiler.plugin("environment", (compilation) => {
-      if (!fs.existsSync(this.rootPath)) {
-        fs.mkdirSync(this.rootPath);
-      }
-      this.gems.forEach(linkGem.bind(this, compilation, this.rootPath));
-    });
+  link() {
+    if (!fs.existsSync(this.rootPath)) {
+      fs.mkdirSync(this.rootPath);
+    }
+
+    this.gems.forEach(linkGem.bind(this, this.rootPath));
   }
+
+  // apply(compiler) {
+  //   // compiler.plugin("compilation", (compilation) => {
+  //   compiler.plugin("environment", (compilation) => {
+  //     if (!fs.existsSync(this.rootPath)) {
+  //       fs.mkdirSync(this.rootPath);
+  //     }
+  //     this.gems.forEach(linkGem.bind(this, compilation, this.rootPath));
+  //   });
+  // }
 }
 
 module.exports = WebpackSymlinkGem;
