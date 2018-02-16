@@ -60,6 +60,7 @@ function linkGem(compilation, rootPath, config) {
   fs.symlinkSync(fullGemPath, localPath(rootPath, gem));
 
   console.log('ls -lah ~/vendor/gems/ ', execSync('ls -lah ./vendor/gems/').toString().trim());
+  console.log('ls -lah ~/vendor/gems/carwow_theme/ ', execSync('ls -lah ./vendor/gems/carwow_theme/').toString().trim());
 }
 
 class WebpackSymlinkGem {
