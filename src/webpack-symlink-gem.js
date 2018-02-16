@@ -27,48 +27,48 @@ function clean(rootPath, gem) {
 
 function linkGem(rootPath, config) {
   console.log('LINKING GEM: ', config.name);
-  // var cmd = "git clone -b 'v4.7.2' --single-branch --depth 1 git@github.com:carwow/carwow-theme.git ./"+config.gemPathRoot+"/carwow_theme-4.7.2";
+  var cmd = "git clone -b 'v4.7.2' --single-branch --depth 1 git@github.com:carwow/carwow-theme.git ./vendor/gems/carwow_theme-4.7.2";
 
   // execSync(cmd);
 
-  console.log('CWD: ', execSync('pwd').toString().trim());
-  // console.log('ls ~/vendor/bundle/ruby/2.4.0/gems/ ', execSync('ls ./vendor/bundle/ruby/2.4.0/gems/').toString().trim());
-  let gemPathRoot;
-  const gem = config.name;
-  const gemPath = config.gemPath || "";
+  // console.log('CWD: ', execSync('pwd').toString().trim());
+  // // console.log('ls ~/vendor/bundle/ruby/2.4.0/gems/ ', execSync('ls ./vendor/bundle/ruby/2.4.0/gems/').toString().trim());
+  // let gemPathRoot;
+  // const gem = config.name;
+  // const gemPath = config.gemPath || "";
 
-  clean(rootPath, gem);
+  // clean(rootPath, gem);
 
-  try {
-    gemPathRoot = execSync(gemShowCmd(gem)).toString().trim();
-    console.log('bundle show ', gem, ': ', gemPathRoot);
-  } catch (err) {
-    console.log('ERROR getting gemPathRoot!');
-    // compilation.errors.push(makeError(err.message));
-    return;
-  }
-
-  console.log('ls gemPathRoot ', execSync('ls -lah ' + gemPathRoot).toString().trim());
-  console.log('ls gemPathRoot ', execSync('ls -lah ' + gemPathRoot + '/').toString().trim());
-
-  if (!fs.existsSync(gemPathRoot)) {
-    console.log('ERROR - gemPathRoot does not exist! ', gemPathRoot);
-  }
-
-  const fullGemPath = path.join(gemPathRoot, gemPath);
-  console.log('fullGemPath: ', fullGemPath);
-  console.log('COPYING DIR OVER ', fullGemPath, ' to ', localPath(rootPath, gem));
-  copydir.sync(fullGemPath, localPath(rootPath, gem));
-  // if (!fs.existsSync(fullGemPath)) {
-  //   // compilation.errors.push(makeError("Path for gem was invalid: " + fullGemPath));
-  //   // return;
-  //   console.log("WARNING: Path for gem was invalid, webpack may not compile: " + fullGemPath);
+  // try {
+  //   gemPathRoot = execSync(gemShowCmd(gem)).toString().trim();
+  //   console.log('bundle show ', gem, ': ', gemPathRoot);
+  // } catch (err) {
+  //   console.log('ERROR getting gemPathRoot!');
+  //   // compilation.errors.push(makeError(err.message));
+  //   return;
   // }
 
-  // fs.symlinkSync(fullGemPath, localPath(rootPath, gem));
+  // console.log('ls gemPathRoot ', execSync('ls -lah ' + gemPathRoot).toString().trim());
+  // console.log('ls gemPathRoot ', execSync('ls -lah ' + gemPathRoot + '/').toString().trim());
 
-  console.log('ls -lah ~/vendor/gems/ ', execSync('ls -lah ./vendor/gems/').toString().trim());
-  console.log('ls -lah ~/vendor/gems/carwow_theme/ ', execSync('ls -lah ./vendor/gems/carwow_theme/').toString().trim());
+  // if (!fs.existsSync(gemPathRoot)) {
+  //   console.log('ERROR - gemPathRoot does not exist! ', gemPathRoot);
+  // }
+
+  // const fullGemPath = path.join(gemPathRoot, gemPath);
+  // console.log('fullGemPath: ', fullGemPath);
+  // console.log('COPYING DIR OVER ', fullGemPath, ' to ', localPath(rootPath, gem));
+  // copydir.sync(fullGemPath, localPath(rootPath, gem));
+  // // if (!fs.existsSync(fullGemPath)) {
+  // //   // compilation.errors.push(makeError("Path for gem was invalid: " + fullGemPath));
+  // //   // return;
+  // //   console.log("WARNING: Path for gem was invalid, webpack may not compile: " + fullGemPath);
+  // // }
+
+  // // fs.symlinkSync(fullGemPath, localPath(rootPath, gem));
+
+  // console.log('ls -lah ~/vendor/gems/ ', execSync('ls -lah ./vendor/gems/').toString().trim());
+  // console.log('ls -lah ~/vendor/gems/carwow_theme/ ', execSync('ls -lah ./vendor/gems/carwow_theme/').toString().trim());
 }
 
 class WebpackSymlinkGem {
