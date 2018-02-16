@@ -25,6 +25,8 @@ function clean(rootPath, gem) {
 }
 
 function linkGem(compilation, rootPath, config) {
+  console.log('LINKING GEM: ', config.name);
+  console.log('CWD: ', execSync('pwd'));
   let gemPathRoot;
   const gem = config.name;
   const gemPath = config.gemPath || "";
