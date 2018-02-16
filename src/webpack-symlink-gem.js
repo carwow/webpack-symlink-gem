@@ -17,7 +17,7 @@ function gemShowCmd(gem) {
 }
 
 function clean(rootPath, gem) {
-  fs.execSync('mkdir -p ' + rootPath);
+  execSync('mkdir -p ' + rootPath);
 
   const path = localPath(rootPath, gem);
 
