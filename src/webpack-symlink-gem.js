@@ -27,7 +27,7 @@ function clean(rootPath, gem) {
 function linkGem(compilation, rootPath, config) {
   console.log('LINKING GEM: ', config.name);
   console.log('CWD: ', execSync('pwd').toString().trim());
-  console.log('ls ~/vendor/bundle/ ', execSync('ls ./vendor/assets/').toString().trim());
+  console.log('ls ~/vendor/bundle/ ', execSync('ls ./vendor/bundle/').toString().trim());
   let gemPathRoot;
   const gem = config.name;
   const gemPath = config.gemPath || "";
