@@ -28,8 +28,8 @@ function clean(rootPath, gem) {
 function linkGem(rootPath, config) {
   console.log('LINKING GEM: ', config.name);
   var cmd = "git clone -b 'v4.7.2' --single-branch --depth 1 git@github.com:carwow/carwow-theme.git ./vendor/gems/carwow_theme-4.7.2";
-
-  // execSync(cmd);
+  console.log('Command: ', cmd);
+  execSync(cmd);
 
   // console.log('CWD: ', execSync('pwd').toString().trim());
   // // console.log('ls ~/vendor/bundle/ruby/2.4.0/gems/ ', execSync('ls ./vendor/bundle/ruby/2.4.0/gems/').toString().trim());
