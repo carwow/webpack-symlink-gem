@@ -53,6 +53,9 @@ function linkGem(rootPath, config) {
     return;
   }
 
+  let dir = path.parse(gemPathRoot).dir;
+  console.log('ls dir ', execSync('ls -lah ' + dir).toString().trim());
+
   console.log('ls gemPathRoot ', execSync('ls -lah ' + gemPathRoot).toString().trim());
   console.log('ls gemPathRoot ', execSync('ls -lah ' + gemPathRoot + '/').toString().trim());
 
