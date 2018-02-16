@@ -17,8 +17,6 @@ function gemShowCmd(gem) {
 }
 
 function clean(rootPath, gem) {
-  execSync('mkdir -p ' + rootPath);
-
   const path = localPath(rootPath, gem);
 
   if (fs.existsSync(path)) {
@@ -76,7 +74,8 @@ class WebpackSymlinkGem {
   }
 
   apply(compiler) {
-    compiler.plugin("compilation", (compilation) => {
+    // compiler.plugin("compilation", (compilation) => {
+    compiler.plugin("environment", (compilation) => {
       if (!fs.existsSync(this.rootPath)) {
         fs.mkdirSync(this.rootPath);
       }
