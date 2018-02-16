@@ -46,6 +46,7 @@ function linkGem(compilation, rootPath, config) {
   console.log('fullGemPath: ', fullGemPath);
   if (!fs.existsSync(fullGemPath)) {
     compilation.errors.push(makeError("Path for gem was invalid: " + fullGemPath));
+    console.log('ls /tmp/ ', execSync('ls /tmp/'));
     return;
   }
 
