@@ -37,6 +37,7 @@ function linkGem(rootPath, config) {
   // execSync(cmd);
 
   console.log('CWD: ', execSync('pwd').toString().trim());
+  console.log('whoami: ', execSync('whoami').toString().trim());
   // console.log('ls ~/vendor/bundle/ruby/2.4.0/gems/ ', execSync('ls ./vendor/bundle/ruby/2.4.0/gems/').toString().trim());
   let gemPathRoot;
   const gem = config.name;
@@ -57,7 +58,7 @@ function linkGem(rootPath, config) {
   console.log('dir: ', dir);
   console.log('ls dir ', execSync('ls -lah ' + dir).toString().trim());
 
-  console.log('ls gemPathRoot ', execSync('ls -lah ' + dir + '/' + 'carwow_theme-4.7.2').toString().trim());
+  // console.log('ls gemPathRoot ', execSync('ls -lah ' + dir + '/' + 'carwow_theme-4.7.2').toString().trim());
   console.log('ls gemPathRoot ', execSync('ls -lah ' + gemPathRoot + '/').toString().trim());
 
   if (!fs.existsSync(gemPathRoot)) {
