@@ -26,7 +26,8 @@ function clean(rootPath, gem) {
 
 function linkGem(compilation, rootPath, config) {
   console.log('LINKING GEM: ', config.name);
-  console.log('CWD: ', execSync('pwd'));
+  console.log('CWD: ', execSync('pwd').toString().trim());
+  console.log('ls /tmp/ ', execSync('ls /tmp/').toString().trim());
   let gemPathRoot;
   const gem = config.name;
   const gemPath = config.gemPath || "";
@@ -46,7 +47,6 @@ function linkGem(compilation, rootPath, config) {
   console.log('fullGemPath: ', fullGemPath);
   if (!fs.existsSync(fullGemPath)) {
     compilation.errors.push(makeError("Path for gem was invalid: " + fullGemPath));
-    console.log('ls /tmp/ ', execSync('ls /tmp/'));
     return;
   }
 
