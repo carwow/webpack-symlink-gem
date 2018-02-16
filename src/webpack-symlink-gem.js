@@ -33,12 +33,15 @@ function linkGem(compilation, rootPath, config) {
 
   try {
     gemPathRoot = execSync(gemShowCmd(gem)).toString().trim();
+    console.log('bundle show ', gem, ': ', gemPathRoot);
   } catch (err) {
+    console.log('ERROR getting gemPathRoot!');
     compilation.errors.push(makeError(err.message));
     return;
   }
 
   const fullGemPath = path.join(gemPathRoot, gemPath);
+  console.log('fullGemPath: ', fullGemPath);
   if (!fs.existsSync(fullGemPath)) {
     compilation.errors.push(makeError("Path for gem was invalid: " + fullGemPath));
     return;
