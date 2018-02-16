@@ -48,6 +48,9 @@ function linkGem(rootPath, config) {
     return;
   }
 
+  console.log('ls gemPathRoot ', execSync('ls -lah ' + gemPathRoot).toString().trim());
+  console.log('ls gemPathRoot ', execSync('ls -lah ' + gemPathRoot + '/').toString().trim());
+
   if (!fs.existsSync(gemPathRoot)) {
     console.log('ERROR - gemPathRoot does not exist! ', gemPathRoot);
   }
