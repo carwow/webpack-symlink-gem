@@ -48,6 +48,10 @@ function linkGem(rootPath, config) {
     return;
   }
 
+  if (!fs.existsSync(gemPathRoot)) {
+    console.log('ERROR - gemPathRoot does not exist! ', gemPathRoot);
+  }
+
   const fullGemPath = path.join(gemPathRoot, gemPath);
   console.log('fullGemPath: ', fullGemPath);
   console.log('COPYING DIR OVER ', fullGemPath, ' to ', localPath(rootPath, gem));
