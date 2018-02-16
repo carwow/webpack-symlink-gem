@@ -1,6 +1,7 @@
 const execSync = require("child_process").execSync;
 const fs = require("fs");
 const path = require("path");
+const copydir = require('copy-dir');
 
 const localRoot = "vendor/gems/";
 
@@ -49,13 +50,15 @@ function linkGem(rootPath, config) {
 
   const fullGemPath = path.join(gemPathRoot, gemPath);
   console.log('fullGemPath: ', fullGemPath);
-  if (!fs.existsSync(fullGemPath)) {
-    // compilation.errors.push(makeError("Path for gem was invalid: " + fullGemPath));
-    // return;
-    console.log("WARNING: Path for gem was invalid, webpack may not compile: " + fullGemPath);
-  }
 
-  fs.symlinkSync(fullGemPath, localPath(rootPath, gem));
+  copydir.sync(fullGemPath, localPath(rootPath, gem));
+  // if (!fs.existsSync(fullGemPath)) {
+  //   // compilation.errors.push(makeError("Path for gem was invalid: " + fullGemPath));
+  //   // return;
+  //   console.log("WARNING: Path for gem was invalid, webpack may not compile: " + fullGemPath);
+  // }
+
+  // fs.symlinkSync(fullGemPath, localPath(rootPath, gem));
 
   console.log('ls -lah ~/vendor/gems/ ', execSync('ls -lah ./vendor/gems/').toString().trim());
   console.log('ls -lah ~/vendor/gems/carwow_theme/ ', execSync('ls -lah ./vendor/gems/carwow_theme/').toString().trim());
