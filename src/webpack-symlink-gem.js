@@ -26,13 +26,13 @@ function clean(rootPath, gem) {
 
 function linkGem(compilation, rootPath, config) {
   let gemPathRoot;
-  const gem = config.name;
+  const gem = config.localName || config.name;
   const gemPath = config.gemPath || "";
 
   clean(rootPath, gem);
 
   try {
-    gemPathRoot = execSync(gemShowCmd(gem)).toString().trim();
+    gemPathRoot = execSync(gemShowCmd(config.name)).toString().trim();
   } catch (err) {
     compilation.errors.push(makeError(err.message));
     return;
