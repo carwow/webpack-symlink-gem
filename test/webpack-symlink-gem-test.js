@@ -47,7 +47,9 @@ describe("WebpackSymlinkGem", function () {
         plugin = new WebpackSymlinkGem({
           rootPath: folder,
           gems: [ { name: "gem_one", gemPath: "lib" },
-                  { name: "gem_two" }]
+                  { name: "gem_two" },
+                  { name: "gem_one", localName: "other_gem_one" },
+                  { name: "gem_one", localName: "other_gem_one_with_gem_path", gemPath: "lib" }]
         });
         compiler = new FakeCompiler();
 
@@ -56,19 +58,21 @@ describe("WebpackSymlinkGem", function () {
         compilation = new FakeCompilation();
         compiler.callbacks.compilation(compilation);
 
+        if (compilation.errors.length > 0) {
+          console.error(compilation.errors);
+          assert.equal(compilation.errors, [], "Expected no errors");
+        }
+
         done();
       });
     });
 
     it("creates a symlink in rootPath for each gem", function () {
-      if (compilation.errors.length > 0) {
-        console.error(compilation.errors);
-        assert.equal(compilation.errors, [], "Expected no errors");
-      }
-
       [
         { link: rootFolder + "/gem_one", expected_path: "test/fake-gems/gem_one/lib"},
-        { link: rootFolder + "/gem_two", expected_path: "test/fake-gems/gem_two"}
+        { link: rootFolder + "/gem_two", expected_path: "test/fake-gems/gem_two"},
+        { link: rootFolder + "/other_gem_one", expected_path: "test/fake-gems/gem_one"},
+        { link: rootFolder + "/other_gem_one_with_gem_path", expected_path: "test/fake-gems/gem_one/lib"}
       ].forEach((example) => {
         assert(fs.existsSync(example.link), "Symlink '" + example.link + "' was not created");
 
