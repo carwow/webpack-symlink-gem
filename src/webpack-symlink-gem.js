@@ -18,10 +18,15 @@ function gemShowCmd(gem) {
 
 function clean(rootPath, gem) {
   const path = localPath(rootPath, gem);
-  const stats = fs.lstatSync(path)
 
-  if (stats.isSymbolicLink()) {
-    fs.unlinkSync(path);
+  try {
+    const stats = fs.lstatSync(path);
+
+    if (stats.isSymbolicLink()) {
+      fs.unlinkSync(path);
+    }
+  } catch(err) {
+    if (err.code != 'ENOENT') throw err;
   }
 }
 
