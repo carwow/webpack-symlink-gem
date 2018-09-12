@@ -18,8 +18,9 @@ function gemShowCmd(gem) {
 
 function clean(rootPath, gem) {
   const path = localPath(rootPath, gem);
+  const stats = fs.lstatSync(path)
 
-  if (fs.existsSync(path)) {
+  if (stats.isSymbolicLink()) {
     fs.unlinkSync(path);
   }
 }
